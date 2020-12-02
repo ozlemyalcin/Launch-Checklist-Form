@@ -15,6 +15,33 @@
 
 window.addEventListener("load", function(){
 
+   let URL="https://handlers.education.launchcode.org/static/planets.json";
+   fetch(URL).then(function(response){
+      response.json().then(function(json){
+         const missionTarget=document.getElementById("missionTarget");
+   
+         //missionTarget.addEventListener("load",function(){
+            missionTarget.innerHTML=`
+            
+            <h2>Mission Destination</h2>
+            <ol>
+               <li>Name: ${json[3].name}</li>
+               <li>Diameter: ${json[3].diameter}</li>
+               <li>Star: ${json[3].star}</li>
+               <li>Distance from Earth: ${json[3].distance}</li>
+               <li>Number of Moons: ${json[3].moons}</li>
+            </ol>
+            <img src="${json[3].image}"></img>
+            
+            `;
+            
+         //});
+
+      });
+   });
+
+
+
    let form= document.getElementById("launchForm");
    form.addEventListener("submit",function(event){
       let pilotName= document.querySelector("input[name=pilotName]");
@@ -63,8 +90,12 @@ window.addEventListener("load", function(){
       newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready for launch`
       newLaunchStatus.innerHTML="Shuttle is Ready for Launch";
       newLaunchStatus.style.color="green";
-   event.preventDefault();
-   }
+      event.preventDefault();
+   };
+
+
+
+
 
    });
 
