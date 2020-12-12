@@ -52,11 +52,17 @@ window.addEventListener("load", function(){
       if (pilotName.value ==="" || copilotName.value==="" || fuelLevel.value==="" || cargoMass.value===""){
          alert("All fields are required!");
          event.preventDefault();
-      };
-      if (isNaN(pilotName.value)=== false || isNaN(copilotName.value)===false || isNaN(fuelLevel.value)===true || isNaN(cargoMass.value)===true){
-         alert("Please enter valid information for each field!");
+      }else if (isNaN(pilotName.value)=== false || isNaN(copilotName.value)===false || isNaN(fuelLevel.value)===true || isNaN(cargoMass.value)===true){
+         alert("Make sure to enter valid information for each field!");
          event.preventDefault();
-      };
+      }else{
+         pilotStatus.innerHTML= `Pilot name: ${pilotName} `
+         copilotName.innerHTML = `Co-pilot: ${copilotName}`
+         fuelLevel.innerHTML=`Fuel level: ${fuelLevel}`
+         cargoMass.innerHTML=`Cargo Mass: ${cargoMass}`
+         
+      }
+
 
    let newFaultyItems=document.getElementById("faultyItems");
    let newLaunchStatus=document.getElementById("launchStatus");
@@ -68,13 +74,29 @@ window.addEventListener("load", function(){
    if(fuelLevel.value<10000){
       newFaultyItems.style.visibility="visible";
       newPilotStatus.innerHTML=`Pilot ${pilotName.value} is ready for launch`
-      newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready foor launch`
+      newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready for launch`
       newFuelStatus.innerHTML="Fuel level is not enough fuel for the journey";
-      newLaunchStatus.innerHTML="shuttle not ready for launch";
+      newLaunchStatus.innerHTML="Shuttle not ready for launch";
       newLaunchStatus.style.color="red";
       event.preventDefault();
+   
+   
+   
+   
+   }else if(fuelLevel.value>=10000){
+      newFaultyItems.style.visibility="visible";
+      newPilotStatus.innerHTML=`Pilot ${pilotName.value} is ready for launch`
+      newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready for launch`
+      newFuelStatus.innerHTML="Fuel level is  enough fuel for the journey";
+      newLaunchStatus.innerHTML="Shuttle ready for launch";
+      newLaunchStatus.style.color="green";
+      event.preventDefault();
 
-   }else if(cargoMass.value>10000){
+
+   
+   
+   }
+   if(cargoMass.value>10000){
       newFaultyItems.style.visibility="visible";
       newPilotStatus.innerHTML=`Pilot ${pilotName.value} is ready for launch`
       newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready foor launch`
@@ -84,17 +106,34 @@ window.addEventListener("load", function(){
       event.preventDefault();
 
 
-   }else{
+   }else if(cargoMass.value<=10000){
+      newFaultyItems.style.visibility="visible";
+      newPilotStatus.innerHTML=`Pilot ${pilotName.value} is ready for launch`
+      newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready foor launch`
+      newCargoStatus.innerHTML="Cargo mass is low enough for the shuttle to take of";
+      newLaunchStatus.innerHTML="Shuttle Not Ready for Launch";
+      newLaunchStatus.style.color="red";
+      event.preventDefault();
+
+
+   
+   }
+   if (fuelLevel.value > 10000 && cargoMass.value < 10000){
       newFaultyItems.style.visibility="visible";
       newPilotStatus.innerHTML=`Pilot ${pilotName.value} is ready for launch`
       newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready for launch`
       newLaunchStatus.innerHTML="Shuttle is Ready for Launch";
       newLaunchStatus.style.color="green";
       event.preventDefault();
+   }else{
+      newFaultyItems.style.visibility="visible";
+      newPilotStatus.innerHTML=`Pilot ${pilotName.value} is ready for launch`
+      newCopilotStatus.innerHTML=`Co-pilot ${copilotName.value} is ready for launch`
+      newLaunchStatus.innerHTML="Shuttle is Not for Launch";
+      newLaunchStatus.style.color="red";
+      event.preventDefault();
+
    };
-
-
-
 
 
    });
